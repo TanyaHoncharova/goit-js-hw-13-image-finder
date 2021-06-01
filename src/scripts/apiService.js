@@ -1,8 +1,36 @@
 const KEY = '21857755-e4f1c8434e57799dc3fa1e51f';
 const BASE_URL = 'https://pixabay.com/api/';
 
-// запрос должен выглядеть так 
-// https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=что_искать&page=номер_страницы&per_page=12&key=твой_ключ
+export default class ApiService {
+  constructor() {
+    this.searchQuery = '';
+    this.page = 1;
+  }
 
-// По умолчанию параметр page равен 1. При каждом последующем запросе page увеличивается на 1,
-//     а при поиске по новому ключевому слову необходимо сбрасывать его значение в 1.
+  fetchImages() {
+    const url = `${BASE_URL}/?key=${KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&page=${this.page}&per_page=12`;
+
+    return fetch(url)
+      .then(response => response.json())
+      .then(({ hits }) => {
+        this.incrementPage();
+        return hits;
+      });
+  }
+
+ incrementPage() {
+    this.page += 1;
+  }
+    
+  resetPage() {
+    this.page = 1;
+  }
+
+  get query() {
+    return this.searchQuery;
+  }
+
+  set query(newQuery) {
+    this.searchQuery = newQuery;
+  }
+}
