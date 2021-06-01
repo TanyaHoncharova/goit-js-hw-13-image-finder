@@ -27,6 +27,32 @@ img {
   background-color: rgb(140, 101, 230);
 }
 
+// ________
+// .search-form {
+//   display: flex;
+//   justify-content: center;
+//   padding: 8px;
+//   margin-bottom: 24px;
+// }
+
+// .button {
+//   display: block;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
+
+.button.is-hidden {
+  display: none;
+}
+
+.button > .spinner.is-hidden {
+  display: none;
+}
+
+
+// ______
+
+
 .txt-input {
   display: block;
   margin-top: 30px;
