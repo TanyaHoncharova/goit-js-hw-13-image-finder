@@ -18,13 +18,16 @@ const loadMoreBtn = new LoadMore({
 
 // запрос картинки (input)
 
-refs.input.addEventListener('input', debounce(onInputChange, 500));
+
+refs.searchForm.addEventListener('submit', onSubmit)
 loadMoreBtn.refs.button.addEventListener('click', debounce(fetchImage, 1000));
 
-function onInputChange(event) {
-  apiService.query = event.target.value;
 
-  if (apiService.query === '') {
+function onSubmit(e) {
+  e.preventDefault();
+
+  apiService.query = e.currentTarget.elements.query.value;
+   if (apiService.query === '') {
     return alert('Enter something');;
   }
 
@@ -41,6 +44,7 @@ function fetchImage() {
   apiService.fetchImages().then(hits => {
     addHitsMarkup(hits);
     loadMoreBtn.enable();
+    // element.scrollIntoView();
   });
   }
 
@@ -48,13 +52,19 @@ function fetchImage() {
 function addHitsMarkup(hits) {
   // console.log(hits);
   refs.gallery.insertAdjacentHTML('beforeend', hitsTpl(hits));
+
+  loadMoreBtn.refs.button.scrollIntoView({
+    behavior: 'smooth',
+    block: 'end',
+  });
+
 }
 
 function clearGallery() {
   refs.gallery.innerHTML = '';
 }
 
-// const element = loadMoreBtn.refs.button;
+// const element = document.getElementById('scrollTo');
 // element.scrollIntoView({
 //   behavior: 'smooth',
 //   block: 'end',
