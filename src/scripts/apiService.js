@@ -1,5 +1,5 @@
 const KEY = '21857755-e4f1c8434e57799dc3fa1e51f';
-const BASE_URL = 'https://pixabay.com/api/';
+const BASE_URL = 'https://pixabay.com/api';
 
 export default class ApiService {
   constructor() {
@@ -14,7 +14,11 @@ export default class ApiService {
       .then(response => response.json())
       .then(({ hits }) => {
         this.incrementPage();
-        return hits;
+        if (!hits.lenght === 0) {
+          return hits;
+        } else {
+          alert ('Not finded')
+          }
       });
   }
 
