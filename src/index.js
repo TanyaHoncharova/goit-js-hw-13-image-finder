@@ -44,7 +44,7 @@ function fetchImage() {
   apiService.fetchImages().then(hits => {
     addHitsMarkup(hits);
     loadMoreBtn.enable();
-    // element.scrollIntoView();
+    element.scrollIntoView();
   });
   }
 
@@ -64,8 +64,8 @@ function clearGallery() {
   refs.gallery.innerHTML = '';
 }
 
-// const element = document.getElementById('scrollTo');
-// element.scrollIntoView({
-//   behavior: 'smooth',
-//   block: 'end',
-// });
+const element = document.getElementById('scrollTo');
+element.scrollIntoView({
+  behavior: 'smooth',
+  block: 'end',
+});

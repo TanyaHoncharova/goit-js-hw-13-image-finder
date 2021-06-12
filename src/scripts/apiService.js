@@ -8,18 +8,14 @@ export default class ApiService {
   }
 
   fetchImages() {
-    const url = `${BASE_URL}/?key=${KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&page=${this.page}&per_page=12`;  //12
+    const url = `${BASE_URL}/?key=${KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&page=${this.page}&per_page=12`;
 
     return fetch(url)
       .then(response => response.json())
       .then(({ hits }) => {
         this.incrementPage();
-        if (!hits.lenght === 0) {
-          return hits;
-        } else {
-          alert ('Not finded')
-          }
-      });
+        return hits;
+       });
   }
 
  incrementPage() {
